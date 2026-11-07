@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "app_id": "illustrative-app",
+  "profile_name": "ILLUSTRATIVE invalid: no defaults, bad mode",
+  "mode": "turbo-overclock",
+  "values": {"worker.pool_size": [1, 2]},
+  "created_at": "2026-01-01T00:00:00Z",
+  "status": "active"
+}

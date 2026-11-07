@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0.0",
+  "id": "illustrative-opt-001",
+  "problem": "ILLUSTRATIVE: slow document open",
+  "evidence": "Invented profile showing repeated parsing",
+  "approach": "Cache parsed result inside the app with a bounded size",
+  "outcome": "pending",
+  "confidence": "hypothesis",
+  "tests": [{"name": "regression-suite", "result": "not-run"}],
+  "untested_areas": ["low-memory devices"],
+  "rollback_method": "Revert commit; cache is behind a flag"
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "id": "Bad Name",
+  "purpose": "ILLUSTRATIVE invalid: missing validation/rollback, unsupported type, extra field",
+  "type": "memory-address",
+  "default": 4,
+  "fallback": 2,
+  "adjustability": "whenever",
+  "risk": "extreme",
+  "target_address": "0xdeadbeef"
+}

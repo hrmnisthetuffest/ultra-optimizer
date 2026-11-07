@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0.0",
+  "app_id": "illustrative-app",
+  "profile_level": "L1-passive",
+  "window": {"cumulative_foreground_seconds": 1800},
+  "classes": ["latency-sensitive", "cpu-bound"],
+  "operations": [{"name": "open-document", "count": 12, "p50_ms": 80, "p95_ms": 240, "error_rate": 0}],
+  "startup": {"has_loading_screen": false, "time_to_interactive_ms": 900},
+  "bottleneck_evidence": "ILLUSTRATIVE: invented numbers",
+  "contains_user_content": false
+}

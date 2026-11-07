@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "id": "illustrative-opt-002",
+  "problem": "ILLUSTRATIVE invalid: no rollback method, bad enums",
+  "evidence": "none",
+  "approach": "rewrite everything",
+  "outcome": "great-success",
+  "confidence": "100-percent",
+  "measured": {"samples": 0}
+}

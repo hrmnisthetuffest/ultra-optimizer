@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0.0",
+  "id": "worker.pool_size",
+  "purpose": "ILLUSTRATIVE: size of the app's background worker pool",
+  "type": "integer",
+  "range": {"min": 1, "max": 16, "step": 1},
+  "default": 4,
+  "fallback": 2,
+  "adjustability": "runtime",
+  "workload_categories": ["throughput-oriented"],
+  "requirements": {"platforms": ["any"]},
+  "quality_constraints": ["Output must be byte-identical regardless of pool size"],
+  "validation": "test_pool_size_output_identical",
+  "apply": "Resize the app's own pool between tasks",
+  "rollback": "Restore previous value from last-known-good profile",
+  "risk": "low",
+  "requires_user_confirmation": false
+}

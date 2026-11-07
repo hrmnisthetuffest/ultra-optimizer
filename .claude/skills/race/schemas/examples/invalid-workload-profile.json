@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "app_id": "illustrative-app",
+  "profile_level": "L9-extreme",
+  "window": {"cumulative_foreground_seconds": -5},
+  "classes": [],
+  "contains_user_content": true
+}

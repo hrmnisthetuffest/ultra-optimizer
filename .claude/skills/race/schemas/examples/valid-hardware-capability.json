@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0.0",
+  "detected_at": "2026-01-01T00:00:00Z",
+  "detection_source": "ILLUSTRATIVE: supported OS API",
+  "cpu": {
+    "vendor": "ExampleVendor",
+    "model": "Example CPU 1000",
+    "architecture": "x86_64",
+    "physical_cores": 8,
+    "logical_cores": 16,
+    "numa_nodes": "unknown",
+    "instruction_sets": [
+      {"name": "AVX2", "cpu_supports": true, "os_enabled": true},
+      {"name": "AVX-512", "cpu_supports": false, "os_enabled": "unsupported"}
+    ]
+  },
+  "gpus": [
+    {"vendor": "ExampleVendor", "model": "Example GPU", "kind": "discrete", "vram_bytes": "unknown", "tensor_cores": "unknown"}
+  ],
+  "memory": {"total_bytes": 17179869184, "available_bytes": "unknown", "pressure": "unknown"},
+  "platform": {"os": "ExampleOS", "os_version": "1.0", "process_arch": "x86_64", "execution": "native"}
+}

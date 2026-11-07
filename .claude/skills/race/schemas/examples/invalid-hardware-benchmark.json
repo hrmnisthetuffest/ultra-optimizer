@@ -1,0 +1,8 @@
+{
+  "schema_version": "1.0.0",
+  "id": "Bad ID With Spaces",
+  "hardware_scope": "ILLUSTRATIVE invalid record",
+  "claim": "Vendor X is always faster.",
+  "confidence": "certain",
+  "date": "2026-01-01"
+}

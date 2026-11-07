@@ -1,0 +1,9 @@
+{
+  "schema_version": "1.0.0",
+  "id": "illustrative-example-record",
+  "hardware_scope": "ILLUSTRATIVE: hypothetical Example CPU 1000",
+  "claim": "ILLUSTRATIVE ONLY: not a real measurement.",
+  "confidence": "unverified",
+  "provenance": "Invented for schema demonstration; no license implications.",
+  "date": "2026-01-01"
+}
