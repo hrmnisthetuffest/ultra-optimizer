@@ -48,6 +48,22 @@ RACE (Runtime Adaptive Configuration Engine) is the core of the suite. Most "opt
 
 The repo includes a small stdlib Python reference model of the registry, scheduler and rollback logic (`.claude/skills/race/templates/`), with tests for the cumulative-foreground threshold, pause-on-activity, out-of-range rejection and last-known-good restore. It is an executable contract for the behavior, not universal runtime code. It has not been measured on real hardware fleets.
 
+## Why RACE could matter
+
+This section describes a direction, not a proven result. RACE has been built and tested as a design and a reference model, and it has not yet been benchmarked on real hardware fleets.
+
+**The gap it targets.** Developers usually tune an app on one or two machines and ship one set of defaults to everyone. The same build then runs on a low-memory laptop, a many-core desktop, a shared server and a container with a CPU quota. A fixed default is wrong for most of them: too much parallelism on weak machines, too little on strong ones, caches sized for neither.
+
+**What changes if apps adapt.**
+
+- *Fewer settings for users.* The app picks sensible values for the machine instead of leaving users to tune thread counts or cache sizes.
+- *Better use of hardware people already own.* Spare cores and memory get used when they exist, and the app backs off when they don't.
+- *Fewer "works on my machine" surprises.* Behavior is derived from measured conditions that are recorded, not assumed.
+- *Safer tuning.* Because every adjustment is bounded, validated and reversible, adaptation can't push an app outside limits the developer approved.
+- *A shared pattern.* A common structure (detect, bound, adapt, validate, roll back) can be reviewed and reused across languages and frameworks, instead of every project inventing its own ad hoc tuning.
+
+**What has to be proven first.** Real before/after measurements across different machines, workloads that show a gain larger than the cost of adapting, and evidence that the rollback logic holds up in real applications. Until that exists, treat the claims here as goals. If you try RACE on a project and measure a difference, in either direction, please open an issue with the numbers.
+
 ## Principles
 
 - **Measure first.** No claimed speedup without a baseline and a before/after.
