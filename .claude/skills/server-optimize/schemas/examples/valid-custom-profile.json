@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "profile_id": "example-illustrative-custom-profile",
+  "mode": "custom",
+  "access": {
+    "level": "repo-only",
+    "authorized_environments": [],
+    "credential_mechanism": "none"
+  },
+  "priorities": [
+    "latency",
+    "cost"
+  ],
+  "constraints": {
+    "downtime_allowed": false,
+    "migrations_allowed": false,
+    "spending_limit": {
+      "amount": 100,
+      "currency": "USD",
+      "period": "month"
+    },
+    "notes": "ILLUSTRATIVE values, not a real deployment."
+  },
+  "environments": [
+    {
+      "name": "staging",
+      "kind": "staging",
+      "hosting": {
+        "provider": {
+          "value": "example-provider",
+          "source": "developer-provided"
+        },
+        "region": {
+          "value": "example-region",
+          "source": "developer-provided"
+        },
+        "hosting_type": "vps"
+      },
+      "runtime": {
+        "language": {
+          "value": "python",
+          "source": "developer-provided"
+        },
+        "cpu_arch": {
+          "value": "x86_64",
+          "source": "developer-provided"
+        }
+      },
+      "instance": {
+        "vcpus": {
+          "value": 2,
+          "source": "developer-provided"
+        },
+        "memory_mb": {
+          "value": 4096,
+          "source": "developer-provided"
+        }
+      },
+      "datastores": [
+        {
+          "kind": "sql",
+          "engine": {
+            "value": "postgresql",
+            "source": "developer-provided"
+          },
+          "max_connections": {
+            "value": 100,
+            "source": "developer-provided"
+          }
+        }
+      ],
+      "queues": [],
+      "caches": [
+        {
+          "kind": "kv",
+          "engine": {
+            "value": "redis",
+            "source": "developer-provided"
+          }
+        }
+      ],
+      "endpoints": [
+        {
+          "name": "api",
+          "role": "public-api",
+          "authorized_for_active_testing": false
+        }
+      ],
+      "workload": {
+        "type": "api",
+        "peak_rps": {
+          "value": 50,
+          "source": "developer-provided"
+        },
+        "traffic_pattern": "diurnal"
+      }
+    }
+  ]
+}

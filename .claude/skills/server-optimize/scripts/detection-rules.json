@@ -1,0 +1,292 @@
+{
+  "schema_version": "1.0",
+  "status": "HEURISTIC rules written from general knowledge; not re-verified against current provider documentation (unverified, 2026-11-07). A match is repository evidence only, never proof of the live deployment.",
+  "extend": "Append an object to `targets` (id, category, label, files, globs, content [[file_glob, regex]], dependencies, dirs, confidence_with_match). No code changes needed.",
+  "targets": [
+    {
+      "id": "vercel",
+      "category": "managed-platform",
+      "label": "Vercel",
+      "files": [
+        "vercel.json"
+      ],
+      "globs": [],
+      "content": [],
+      "dependencies": [
+        "vercel"
+      ],
+      "dirs": [
+        ".vercel"
+      ],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "cloudflare",
+      "category": "managed-platform",
+      "label": "Cloudflare (Workers/Pages)",
+      "files": [
+        "wrangler.toml",
+        "wrangler.json",
+        "wrangler.jsonc"
+      ],
+      "globs": [],
+      "content": [],
+      "dependencies": [],
+      "dirs": [],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "railway",
+      "category": "managed-platform",
+      "label": "Railway",
+      "files": [
+        "railway.json",
+        "railway.toml"
+      ],
+      "globs": [],
+      "content": [],
+      "dependencies": [],
+      "dirs": [],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "render",
+      "category": "managed-platform",
+      "label": "Render",
+      "files": [
+        "render.yaml"
+      ],
+      "globs": [],
+      "content": [],
+      "dependencies": [],
+      "dirs": [],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "fly-io",
+      "category": "managed-platform",
+      "label": "Fly.io",
+      "files": [
+        "fly.toml"
+      ],
+      "globs": [
+        "fly.*.toml"
+      ],
+      "content": [],
+      "dependencies": [],
+      "dirs": [],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "supabase",
+      "category": "managed-platform",
+      "label": "Supabase",
+      "files": [
+        "supabase/config.toml"
+      ],
+      "globs": [],
+      "content": [],
+      "dependencies": [],
+      "dirs": [],
+      "confidence_with_match": "medium",
+      "note": "A client dependency alone does not prove Supabase hosts the backend."
+    },
+    {
+      "id": "firebase",
+      "category": "managed-platform",
+      "label": "Firebase",
+      "files": [
+        "firebase.json",
+        ".firebaserc"
+      ],
+      "globs": [],
+      "content": [],
+      "dependencies": [],
+      "dirs": [],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "aws",
+      "category": "cloud-provider",
+      "label": "Amazon Web Services",
+      "files": [
+        "serverless.yml",
+        "samconfig.toml",
+        "cdk.json",
+        "buildspec.yml",
+        "appspec.yml",
+        "amplify.yml"
+      ],
+      "globs": [],
+      "content": [
+        [
+          "template.y*ml",
+          "AWSTemplateFormatVersion"
+        ],
+        [
+          "*.tf",
+          "provider\\s+\\\"aws\\\""
+        ]
+      ],
+      "dependencies": [],
+      "dirs": [
+        ".elasticbeanstalk",
+        "copilot"
+      ],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "gcp",
+      "category": "cloud-provider",
+      "label": "Google Cloud",
+      "files": [
+        "app.yaml",
+        "cloudbuild.yaml",
+        ".gcloudignore"
+      ],
+      "globs": [],
+      "content": [
+        [
+          "*.tf",
+          "provider\\s+\\\"google"
+        ]
+      ],
+      "dependencies": [],
+      "dirs": [],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "azure",
+      "category": "cloud-provider",
+      "label": "Microsoft Azure",
+      "files": [
+        "azure.yaml",
+        "azure-pipelines.yml",
+        "host.json"
+      ],
+      "globs": [
+        "*.bicep"
+      ],
+      "content": [
+        [
+          "*.tf",
+          "provider\\s+\\\"azurerm\\\""
+        ]
+      ],
+      "dependencies": [],
+      "dirs": [
+        ".azure"
+      ],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "docker",
+      "category": "container",
+      "label": "Docker / Compose",
+      "files": [
+        "Dockerfile",
+        "docker-compose.yml",
+        "docker-compose.yaml",
+        "compose.yaml",
+        "compose.yml",
+        ".dockerignore"
+      ],
+      "globs": [
+        "Dockerfile.*",
+        "docker-compose.*.yml",
+        "docker-compose.*.yaml"
+      ],
+      "content": [],
+      "dependencies": [],
+      "dirs": [],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "kubernetes",
+      "category": "orchestrator",
+      "label": "Kubernetes",
+      "files": [
+        "Chart.yaml",
+        "kustomization.yaml",
+        "skaffold.yaml"
+      ],
+      "globs": [],
+      "content": [
+        [
+          "*.y*ml",
+          "(?m)^kind:\\s*(Deployment|StatefulSet|DaemonSet|CronJob|Ingress)\\b"
+        ]
+      ],
+      "dependencies": [],
+      "dirs": [],
+      "confidence_with_match": "high",
+      "note": ""
+    },
+    {
+      "id": "vps-self-hosted",
+      "category": "self-hosted",
+      "label": "VPS / self-hosted server (unconfirmed)",
+      "files": [
+        "ansible.cfg",
+        "playbook.yml",
+        "ecosystem.config.js",
+        "nginx.conf",
+        "Caddyfile",
+        "Procfile"
+      ],
+      "globs": [
+        "*.service",
+        "playbook*.yml"
+      ],
+      "content": [],
+      "dependencies": [],
+      "dirs": [],
+      "confidence_with_match": "medium",
+      "note": "Repository files cannot show whether this is a VPS or dedicated host; the intake must ask."
+    }
+  ],
+  "environment_hints": {
+    "file_name_patterns": [
+      "^\\.env\\.(development|dev|local|staging|stage|production|prod|test)$",
+      "^docker-compose\\.(dev|staging|prod|production)\\.ya?ml$",
+      "^fly\\.(staging|production|prod)\\.toml$"
+    ],
+    "dir_names": [
+      "environments",
+      "overlays",
+      "envs"
+    ],
+    "dir_child_names": [
+      "development",
+      "dev",
+      "staging",
+      "stage",
+      "production",
+      "prod",
+      "preview",
+      "test"
+    ],
+    "note": "Only file and directory NAMES are used. Contents of .env files are never opened."
+  },
+  "sensitive_never_open": [
+    "^\\.env",
+    "\\.pem$",
+    "\\.key$",
+    "\\.p12$",
+    "^id_(rsa|ed25519|ecdsa)",
+    "credentials",
+    "\\.tfstate",
+    "\\.kubeconfig|^kubeconfig|^config$",
+    "secrets?\\."
+  ]
+}

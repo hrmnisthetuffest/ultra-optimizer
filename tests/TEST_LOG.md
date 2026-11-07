@@ -21,3 +21,9 @@
 - `tests/test_ping_optimize_model.py`: 18 tests OK (backoff bounds, retry budget, non-idempotent no-retry, single-flight dedupe, adaptive concurrency limits, simulator loss/latency/outage/rate-limit scenarios).
 - `tests/test_installers.py`: 10 OK with three skills (scratch HOME).
 - Not verified: `evals/evals.json` prompts were not run in a live model; live `/ping-optimize` resolution not checked; RFC 9110 idempotency/Retry-After text not read; no real-network benchmarks run; `install.ps1` still untested.
+
+## /server-optimize (2026-11-07)
+- tests/validate_skill_structure.py --strict-refs: 883 checks, 0 failed.
+- tests/test_server_optimize.py: 16 tests OK (six deployment fixtures, secret non-leak, intake items, schema valid/invalid, adaptation model, access rules).
+- tests/test_installers.py updated for four skills.
+- Not run / not verified: evals not executed on a live model; detection rules heuristic and unverified; no live infrastructure access, so live inspection, staging profiling and production rollback untested; install.ps1/uninstall.ps1 untested; domain references cite no fetched sources.

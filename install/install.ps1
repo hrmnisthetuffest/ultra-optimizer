@@ -6,7 +6,7 @@
 param(
   [ValidateSet('project','personal')][string]$Scope = 'project',
   [string]$Target = '',
-  [ValidateSet('','race','optimize','ping-optimize')][string]$Only = '',
+  [ValidateSet('','race','optimize','ping-optimize','server-optimize')][string]$Only = '',
   [switch]$Yes, [switch]$DryRun, [switch]$ForceBackup
 )
 $ErrorActionPreference = 'Stop'
@@ -16,7 +16,7 @@ if (-not $Target) {
   if ($Scope -eq 'personal') { $Target = Join-Path $env:USERPROFILE '.claude\skills' }
   else { $Target = Join-Path (Get-Location) '.claude\skills' }
 }
-$names = if ($Only) { @($Only) } else { @('race','optimize','ping-optimize') }
+$names = if ($Only) { @($Only) } else { @('race','optimize','ping-optimize','server-optimize') }
 $manifest = Join-Path $Target '.ultra-optimizer-manifest.tsv'
 $ts = Get-Date -Format 'yyyyMMdd-HHmmss'
 $bk = Join-Path $Target ".ultra-optimizer-backups\$ts"

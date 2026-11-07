@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "approved_by_developer": "yes",
+  "parameters": [
+    {
+      "name": "http_workers",
+      "kind": "worker_count",
+      "min": 1,
+      "max": -1,
+      "default": 2,
+      "derived_from": "effective_vcpus",
+      "fraction": 1.0,
+      "requires_verified": true
+    },
+    {
+      "name": "app_cache_mb",
+      "kind": "cache_mb",
+      "min": 32,
+      "max": 512,
+      "default": 64,
+      "derived_from": "memory_limit_mb",
+      "fraction": 0.15,
+      "safety_margin_fraction": 0.2,
+      "requires_verified": true
+    },
+    {
+      "name": "db_pool",
+      "kind": "db_pool_size",
+      "min": 2,
+      "max": 20,
+      "default": 5,
+      "derived_from": "db_max_connections",
+      "fraction": 0.8,
+      "requires_verified": true
+    }
+  ]
+}

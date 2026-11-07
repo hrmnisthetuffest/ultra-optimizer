@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
-# Ultra Optimizer installer (Linux/macOS). Installs the `race`, `optimize` and `ping-optimize` skills.
+# Ultra Optimizer installer (Linux/macOS). Installs the `race`, `optimize`, `ping-optimize` and `server-optimize` skills.
 # Never touches unrelated skills. Never needs admin. Idempotent.
 set -u
 usage() { cat <<U
-Usage: install.sh [--scope project|personal] [--target SKILLS_DIR] [--only race|optimize|ping-optimize]
+Usage: install.sh [--scope project|personal] [--target SKILLS_DIR] [--only race|optimize|ping-optimize|server-optimize]
                   [--yes] [--dry-run] [--force-backup]
   --scope project   (default) install into ./.claude/skills
   --scope personal  install into \$HOME/.claude/skills (personal skills take precedence over project skills)
   --target DIR      explicit skills directory (overrides --scope)
-  --yes             allow replacing an existing race/optimize/ping-optimize directory (a timestamped backup is always made)
+  --yes             allow replacing an existing race/optimize/ping-optimize/server-optimize directory (a timestamped backup is always made)
   --dry-run         print what would happen, change nothing
   --force-backup    back up and reinstall even identical existing installs
 U
@@ -28,7 +28,7 @@ while [ $# -gt 0 ]; do
 done
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC="$HERE/../.claude/skills"
-[ -d "$SRC/race" ] && [ -d "$SRC/optimize" ] && [ -d "$SRC/ping-optimize" ] || { echo "source skills not found at: $SRC" >&2; exit 1; }
+[ -d "$SRC/race" ] && [ -d "$SRC/optimize" ] && [ -d "$SRC/ping-optimize" ] && [ -d "$SRC/server-optimize" ] || { echo "source skills not found at: $SRC" >&2; exit 1; }
 if [ -z "$TARGET" ]; then
   case "$SCOPE" in
     project) TARGET="$PWD/.claude/skills" ;;
@@ -36,8 +36,8 @@ if [ -z "$TARGET" ]; then
     *) echo "invalid --scope: $SCOPE" >&2; exit 2 ;;
   esac
 fi
-case "$ONLY" in ""|race|optimize|ping-optimize) ;; *) echo "invalid --only: $ONLY" >&2; exit 2 ;; esac
-NAMES="race optimize ping-optimize"; [ -n "$ONLY" ] && NAMES="$ONLY"
+case "$ONLY" in ""|race|optimize|ping-optimize|server-optimize) ;; *) echo "invalid --only: $ONLY" >&2; exit 2 ;; esac
+NAMES="race optimize ping-optimize server-optimize"; [ -n "$ONLY" ] && NAMES="$ONLY"
 if command -v sha256sum >/dev/null 2>&1; then H() { sha256sum "$1" | cut -d' ' -f1; }
 elif command -v shasum >/dev/null 2>&1; then H() { shasum -a 256 "$1" | cut -d' ' -f1; }
 else echo "need sha256sum or shasum" >&2; exit 1; fi

@@ -20,7 +20,7 @@ foreach ($line in Get-Content $manifest) {
   else { $kept += $parts[1] }
 }
 if (-not $DryRun) {
-  foreach ($n in 'race','optimize','ping-optimize') {
+  foreach ($n in 'race','optimize','ping-optimize','server-optimize') {
     $d = Join-Path $Target $n
     if (Test-Path $d) { Get-ChildItem $d -Recurse -Directory | Sort-Object FullName -Descending | Where-Object { -not (Get-ChildItem $_.FullName -Force) } | Remove-Item; if (-not (Get-ChildItem $d -Force)) { Remove-Item $d } }
   }

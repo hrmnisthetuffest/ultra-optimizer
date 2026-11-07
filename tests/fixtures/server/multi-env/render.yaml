@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: api-staging
+    runtime: node
+  - type: web
+    name: api-production
+    runtime: node

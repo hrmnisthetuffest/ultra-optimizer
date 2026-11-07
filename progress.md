@@ -38,3 +38,6 @@ All phases 1-9 complete except items listed in `tests/TEST_LOG.md` under 'Not ru
 
 ## /ping-optimize
 Implemented 2026-11-07: skill, 38 refs, templates, script, evals, installer/validator support. See tests/TEST_LOG.md.
+
+## /server-optimize
+Implemented 2026-11-07: skill, shared references, schemas, detector, adaptation model, integration refs in the other three skills, fixtures, evals, installer/validator support. See tests/TEST_LOG.md.

@@ -64,7 +64,7 @@ When the user asked for `apply`, do the work with the checks above instead of on
 ## Checklists and references (load as needed)
 
 - Checklists: [baseline-capture](checklists/baseline-capture.md), [regression-checklist](checklists/regression-checklist.md), [security-privacy-regression](checklists/security-privacy-regression.md), [performance-comparison](checklists/performance-comparison.md), [rollback](checklists/rollback.md), [compatibility-and-data](checklists/compatibility-and-data.md)
-- References: [opportunity-catalog](references/opportunity-catalog.md), [stacks](references/stacks.md), [scoring](references/scoring.md), [reporting](references/reporting.md), [open-source-contribution](references/open-source-contribution.md)
+- References: [opportunity-catalog](references/opportunity-catalog.md), [stacks](references/stacks.md), [scoring](references/scoring.md), [reporting](references/reporting.md), [open-source-contribution](references/open-source-contribution.md), [server-integration](references/server-integration.md)
 
 ## Reporting
 

@@ -76,6 +76,7 @@ If the app lacks the APIs or tunable parameters for a safe runtime, report that 
 | Testing, budgets, data, compatibility | references/quality/ |
 | Extend knowledge | references/core/knowledge-expansion.md |
 | Contributing to someone else's project | references/core/open-source-contribution.md |
+| Backend/server component | references/server-integration.md |
 
 Schemas live in [schemas/](schemas/) (validate records with `scripts/validate_records.py`). Stack-neutral contracts and an executable reference model live in [templates/](templates/); they are contracts to adapt, not universal runtime code.
 

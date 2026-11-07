@@ -32,6 +32,7 @@ class InstallerTests(unittest.TestCase):
         self.assertTrue((self.skills / "race" / "SKILL.md").is_file())
         self.assertTrue((self.skills / "optimize" / "SKILL.md").is_file())
         self.assertTrue((self.skills / "ping-optimize" / "SKILL.md").is_file())
+        self.assertTrue((self.skills / "server-optimize" / "SKILL.md").is_file())
         self.assertEqual((self.skills / "unrelated" / "SKILL.md").read_text().splitlines()[-1], "keep me")
         self.assertTrue((self.skills / ".ultra-optimizer-manifest.tsv").is_file())
 
@@ -82,6 +83,7 @@ class InstallerTests(unittest.TestCase):
         self.assertFalse((self.skills / "race" / "SKILL.md").exists())
         self.assertFalse((self.skills / "optimize").exists())
         self.assertFalse((self.skills / "ping-optimize").exists())
+        self.assertFalse((self.skills / "server-optimize").exists())
         self.assertTrue((self.skills / "unrelated" / "SKILL.md").is_file())
 
     def test_uninstall_without_manifest_is_noop(self):
