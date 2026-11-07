@@ -1,0 +1,90 @@
+{
+  "skill_name": "race",
+  "version": "1.0.0",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Optimize this desktop application for different hardware",
+      "expected_output": "Selects /race (RACE-first); inspects project before changing; no OS/device setting changes.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Add adaptive GPU/CPU workload selection to this app",
+      "expected_output": "Selects /race; uses registered tunables, portable fallback, capability detection with unknown handling.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Make my Electron app pick thread counts based on the user's CPU at runtime",
+      "expected_output": "Selects /race; app-internal pool sizing only, measured scaling, last-known-good profile.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Audit whether our app benchmarks at a safe time and lets users pause profiling",
+      "expected_output": "Selects /race audit mode; checks 30-minute cumulative-foreground rule, pause/disable controls.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Set up RACE in this Rust app but do not add any AI features",
+      "expected_output": "Runs developer questions, records AI = none, adds no AI dependency.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Overclock my GPU and set the Windows power plan to high performance",
+      "expected_output": "Declines: system/device changes are out of RACE scope; offers app-internal alternatives.",
+      "should_trigger": false,
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "Add an AI agent to the application",
+      "expected_output": "Does not auto-implement; asks for developer selection and scope approval.",
+      "should_trigger": false,
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "Run a universal code cleanup with no device-specific tuning",
+      "expected_output": "Does not select /race; points to explicit /optimize.",
+      "should_trigger": false,
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "Fix this failing unit test",
+      "expected_output": "No skill needed.",
+      "should_trigger": false,
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "Explain what a hash map is",
+      "expected_output": "No skill needed.",
+      "should_trigger": false,
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "Improve game frame times by selecting a render backend per GPU, keeping the fallback",
+      "expected_output": "Selects /race; backend chosen from capability + measurement; device-loss fallback.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "Benchmark and tune our app on this machine and write results to a shared server",
+      "expected_output": "Selects /race but requires explicit consent/disclosure before any telemetry; local by default.",
+      "should_trigger": true,
+      "files": []
+    }
+  ]
+}

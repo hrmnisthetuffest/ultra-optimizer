@@ -1,0 +1,126 @@
+{
+  "electron-react-ts-sqlite": {
+    "must_include": [
+      "applications/electron-apps.md",
+      "frameworks/react-and-nextjs.md",
+      "languages/javascript-typescript.md"
+    ],
+    "must_exclude": [
+      "languages/rust.md",
+      "frameworks/qt-gtk-and-native-ui.md"
+    ],
+    "unknown_contains": []
+  },
+  "nextjs-web": {
+    "must_include": [
+      "frameworks/react-and-nextjs.md",
+      "applications/websites-and-core-web-vitals.md"
+    ],
+    "must_exclude": [
+      "applications/electron-apps.md",
+      "languages/rust.md"
+    ],
+    "unknown_contains": []
+  },
+  "rust-native": {
+    "must_include": [
+      "languages/rust.md",
+      "workloads/gpu-bound.md"
+    ],
+    "must_exclude": [
+      "frameworks/react-and-nextjs.md"
+    ],
+    "unknown_contains": []
+  },
+  "python-data-desktop": {
+    "must_include": [
+      "languages/python.md",
+      "frameworks/qt-gtk-and-native-ui.md",
+      "workloads/memory-bound.md"
+    ],
+    "must_exclude": [
+      "languages/rust.md"
+    ],
+    "unknown_contains": []
+  },
+  "cpp-qt": {
+    "must_include": [
+      "languages/c-cpp.md",
+      "frameworks/qt-gtk-and-native-ui.md"
+    ],
+    "must_exclude": [
+      "languages/python.md"
+    ],
+    "unknown_contains": []
+  },
+  "flutter-mobile": {
+    "must_include": [
+      "frameworks/flutter-and-react-native.md"
+    ],
+    "must_exclude": [
+      "applications/electron-apps.md"
+    ],
+    "unknown_contains": []
+  },
+  "unity-game": {
+    "must_include": [
+      "applications/games-and-game-launchers.md",
+      "workloads/real-time.md"
+    ],
+    "must_exclude": [
+      "frameworks/react-and-nextjs.md"
+    ],
+    "unknown_contains": []
+  },
+  "browser-like": {
+    "must_include": [
+      "applications/browsers-and-browser-engines.md",
+      "languages/c-cpp.md"
+    ],
+    "must_exclude": [
+      "applications/electron-apps.md"
+    ],
+    "unknown_contains": []
+  },
+  "messaging-client": {
+    "must_include": [
+      "applications/electron-apps.md",
+      "workloads/network-bound.md"
+    ],
+    "must_exclude": [
+      "applications/games-and-game-launchers.md"
+    ],
+    "unknown_contains": []
+  },
+  "media-editor": {
+    "must_include": [
+      "hardware/display-and-media-capabilities.md",
+      "frameworks/qt-gtk-and-native-ui.md"
+    ],
+    "must_exclude": [
+      "frameworks/django-and-fastapi.md"
+    ],
+    "unknown_contains": []
+  },
+  "monorepo": {
+    "must_include": [
+      "frameworks/react-and-nextjs.md",
+      "languages/rust.md",
+      "frameworks/django-and-fastapi.md"
+    ],
+    "must_exclude": [
+      "applications/electron-apps.md"
+    ],
+    "unknown_contains": []
+  },
+  "unknown-stack": {
+    "must_include": [],
+    "must_exclude": [
+      "languages/rust.md",
+      "languages/python.md"
+    ],
+    "unknown_contains": [
+      "no recognised manifest"
+    ]
+  }
+}

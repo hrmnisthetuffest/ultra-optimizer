@@ -1,0 +1,62 @@
+{
+  "skill_name": "optimize",
+  "version": "1.0.0",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "/optimize audit",
+      "expected_output": "Runs audit: inspects repo, prioritizes broad-benefit changes, no hardware detection.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "/optimize apply the safe fixes from the audit",
+      "expected_output": "Implements bounded changes with baseline, tests, rollback point; reports files and measurements.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "/optimize make the build faster",
+      "expected_output": "Build config/dependency changes for declared targets; no per-machine tuning.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "/optimize choose the CUDA path if the user has an NVIDIA GPU",
+      "expected_output": "Refuses live hardware-based selection; explains this belongs to /race and does not invoke it.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "/optimize remove the slow feature to speed things up",
+      "expected_output": "Refuses feature removal; proposes behavior-preserving alternatives.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "/optimize add an AI assistant to help users",
+      "expected_output": "Refuses to add AI without explicit developer selection.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "/optimize review the open pull request for performance regressions",
+      "expected_output": "Review mode: read-only findings with evidence confidence labels.",
+      "should_trigger": true,
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "Optimize this code",
+      "expected_output": "Not auto-invoked (disable-model-invocation); /optimize requires explicit user invocation.",
+      "should_trigger": false,
+      "files": []
+    }
+  ]
+}
