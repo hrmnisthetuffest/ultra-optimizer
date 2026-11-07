@@ -134,6 +134,27 @@ def check_race_isolation(rep, root):
         rep.check(not pat.search(f.read_text(encoding="utf-8")), f"{f.relative_to(root)}: references optimize paths")
 
 
+def check_ping_isolation(rep, root):
+    """ping-optimize is self-contained and 13-section; race/optimize never link into it."""
+    pdir = root / ".claude" / "skills" / "ping-optimize"
+    pat = re.compile(r"\.\./(race|optimize)|skills/(race|optimize)/", re.I)
+    rep.check((pdir / "references" / "INDEX.md").is_file(), "ping-optimize/references/INDEX.md missing")
+    for f in sorted(pdir.rglob("*")):
+        if f.is_file() and f.suffix in {".md", ".json", ".py"}:
+            text = f.read_text(encoding="utf-8")
+            rep.check(not pat.search(text), f"{f.relative_to(root)}: references race/optimize paths")
+            if f.suffix == ".md":
+                check_links(rep, f)
+            if f.suffix == ".md" and "references" in f.parts and f.name != "INDEX.md":
+                heads = " ".join(h.lower() for h in re.findall(r"^#{2,3}\s+(.*)$", text, re.M))
+                missing = [k for k in SECTION_KEYWORDS if k not in heads]
+                rep.check(not missing, f"{f.relative_to(root)}: missing standard sections {missing}")
+    for other in ("race", "optimize"):
+        for f in sorted((root / ".claude" / "skills" / other).rglob("*.md")):
+            rep.check("skills/ping-optimize" not in f.read_text(encoding="utf-8"),
+                      f"{f.relative_to(root)}: links into ping-optimize")
+
+
 def check_index(rep, root):
     idx = root / ".claude" / "skills" / "race" / "references" / "INDEX.md"
     rep.check(idx.is_file(), "race/references/INDEX.md missing")
@@ -150,6 +171,8 @@ def main():
     rep = Report()
     check_skill(rep, root, "race", expect_disable=False)
     check_skill(rep, root, "optimize", expect_disable=True)
+    check_skill(rep, root, "ping-optimize", expect_disable=False)
+    check_ping_isolation(rep, root)
     check_references(rep, root, a.strict_refs)
     check_optimize_isolation(rep, root)
     check_race_isolation(rep, root)

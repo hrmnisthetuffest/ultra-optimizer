@@ -15,3 +15,9 @@
 - Spec 18.3 items needing a real application runtime (GPU driver mismatch, real benchmark pause, telemetry egress) are covered only by the reference model's logic or by documentation.
 - Hardware facts: only four NVIDIA compute capabilities are sourced; everything else is generic method marked unverified.
 - Official Claude Code skill validation command: none exists in 2.1.319 docs; `claude --debug` not used.
+
+## /ping-optimize (2026-11-07)
+- `tests/validate_skill_structure.py --strict-refs`: 612 passed / 0 failed (includes ping-optimize isolation from race/optimize paths).
+- `tests/test_ping_optimize_model.py`: 18 tests OK (backoff bounds, retry budget, non-idempotent no-retry, single-flight dedupe, adaptive concurrency limits, simulator loss/latency/outage/rate-limit scenarios).
+- `tests/test_installers.py`: 10 OK with three skills (scratch HOME).
+- Not verified: `evals/evals.json` prompts were not run in a live model; live `/ping-optimize` resolution not checked; RFC 9110 idempotency/Retry-After text not read; no real-network benchmarks run; `install.ps1` still untested.

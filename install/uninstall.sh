@@ -32,7 +32,7 @@ while IFS=$'\t' read -r h f; do
   else KEPT+=("$f"); fi
 done < "$MAN"
 if [ "$DRY" = 0 ]; then
-  for n in race optimize; do [ -d "$TARGET/$n" ] && find "$TARGET/$n" -depth -type d -empty -delete 2>/dev/null; done
+  for n in race optimize ping-optimize; do [ -d "$TARGET/$n" ] && find "$TARGET/$n" -depth -type d -empty -delete 2>/dev/null; done
   [ "${#KEPT[@]}" -eq 0 ] && rm -f "$MAN"
 fi
 echo "Removed files: $REM (already missing: $MISS)"

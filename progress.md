@@ -35,3 +35,6 @@ See `tests/TEST_LOG.md`.
 
 ## Status update 2026-11-07 (end of build)
 All phases 1-9 complete except items listed in `tests/TEST_LOG.md` under 'Not run / not verified'. LICENSE is a placeholder for the owner to choose. Repo: private GitHub `hrmnisthetuffest/ultra-optimizer`.
+
+## /ping-optimize
+Implemented 2026-11-07: skill, 38 refs, templates, script, evals, installer/validator support. See tests/TEST_LOG.md.
