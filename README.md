@@ -11,6 +11,14 @@
 
 </div>
 
+## Why this exists
+
+Software today often runs the same way on a ten-year-old laptop and a workstation with 64 cores. Many apps ship with settings picked for the developer's machine, then feel sluggish, hog memory or ignore the hardware sitting idle on yours. Most of us have used something that was clearly never tuned for the computer in front of us.
+
+The idea behind RACE is that an app can look at the machine it is actually running on, and at how you actually use it, and tune its own behavior to fit: more parallel work where there are spare cores, smaller caches where memory is tight, backing off while you are busy. The app adapts to you instead of asking you to dig through settings or buy new hardware.
+
+That only works if it is done carefully, which is why every command here is bounded, measured and reversible. This is an early project by a 15-year-old developer, so the foundations are tested, but real-world benchmarks are still to come, and feedback is welcome.
+
 ## What it is
 
 Ultra Optimizer is a set of slash commands for [Claude Code](https://claude.com/claude-code). Each one has a strict job and a strict boundary, so you always know what it will and will not change.
