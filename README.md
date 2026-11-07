@@ -22,6 +22,24 @@ Ultra Optimizer is a set of slash commands for [Claude Code](https://claude.com/
 | `/ping-optimize` | Network latency and transfer efficiency in the app's own networking code. | Never touches router, DNS, VPN or OS settings. |
 | `/server-optimize` | Backend and deployment analysis with one upfront intake. | Repo-only by default; live or production changes need explicit approval. |
 
+## RACE in depth
+
+RACE (Runtime Adaptive Configuration Engine) is the core of the suite. Most "optimize for this machine" code hard-codes guesses. RACE instead gives an application a small, auditable layer that reads what the machine really has and how the app is really being used, then adjusts only the app's own settings.
+
+**What it does**
+
+- **Detects** CPU, memory and workload shape at runtime, and records which facts were verified and which are only estimated.
+- **Adapts bounded settings**: worker counts, concurrency, cache sizes, batch sizes and scheduling. Each setting has a developer-approved range, and a value outside that range is rejected.
+- **Stays polite**: adaptation work pauses while the user is active and only counts cumulative foreground time toward its thresholds.
+- **Rolls back**: every change is validated against a baseline, and the last known-good configuration is restored if validation fails.
+- **Stays honest**: no speedup is claimed without a before/after measurement.
+
+**What it never does:** edit BIOS, firmware, drivers, OS power settings or graphics settings, and it adds no AI features unless you ask for them.
+
+**Subcommands:** `/race build`, `audit`, `benchmark`, `status`, `improve`, `integrate` and `review`. Build creates the layer in a project, audit checks an existing one, and integrate wires it into code you already have.
+
+The repo includes a small stdlib Python reference model of the registry, scheduler and rollback logic (`.claude/skills/race/templates/`), with tests for the cumulative-foreground threshold, pause-on-activity, out-of-range rejection and last-known-good restore. It is an executable contract for the behavior, not universal runtime code. It has not been measured on real hardware fleets.
+
 ## Principles
 
 - **Measure first.** No claimed speedup without a baseline and a before/after.
