@@ -12,7 +12,7 @@ Source of truth: `ULTRA_OPTIMIZER_CLAUDE_CODE_BUILD_SPEC.md`. Update this file a
 - `/optimize` is self-contained: no links into the race skill folder. Checklists duplicated into `optimize/checklists/`.
 - SKILL.md bodies avoid the shell-injection pattern and stray dollar placeholders.
 - No `allowed-tools`. `argument-hint` used (valid in Claude Code; rejected by claude.ai/API upload).
-- LICENSE is a placeholder: the license choice belongs to the user.
+- LICENSE: MIT (chosen by the owner 2026-11-08).
 - Hardware facts: only schema + clearly-labelled illustrative examples, plus a few records fetched from official sources with real access dates; everything else marked unverified/estimated.
 - Environment note: a GateGuard hook demands stated facts before each first write of a file; facts are given in-chat, hook not disabled.
 
@@ -34,7 +34,7 @@ See `tests/TEST_LOG.md`.
 
 
 ## Status update 2026-11-07 (end of build)
-All phases 1-9 complete except items listed in `tests/TEST_LOG.md` under 'Not run / not verified'. LICENSE is a placeholder for the owner to choose. Repo: private GitHub `hrmnisthetuffest/ultra-optimizer`.
+All phases 1-9 complete except items listed in `tests/TEST_LOG.md` under 'Not run / not verified'.  Repo: private GitHub `hrmnisthetuffest/ultra-optimizer`.
 
 ## /ping-optimize
 Implemented 2026-11-07: skill, 38 refs, templates, script, evals, installer/validator support. See tests/TEST_LOG.md.
