@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/race/hardware-benchmark.schema.json",
+  "title": "RACE hardware evidence / benchmark record",
+  "description": "One piece of hardware knowledge-base evidence (spec 4.9). Do not fabricate: every record needs provenance and a confidence label. Used for the extensible knowledge base and for locally measured results.",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "required": ["schema_version", "id", "hardware_scope", "claim", "confidence", "provenance", "date"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$"},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{2,80}$"},
+    "hardware_scope": {"type": "string", "description": "Which hardware this applies to"},
+    "capability_or_behavior": {"type": "string"},
+    "claim": {"type": "string"},
+    "workload": {"type": "string", "description": "Workload definition, if a performance claim"},
+    "tool": {"type": "object", "additionalProperties": false, "properties": {"name": {"type": "string"}, "version": {"type": "string"}}},
+    "software_versions": {"type": "object", "additionalProperties": {"type": "string"}},
+    "source": {"type": "object", "additionalProperties": false, "properties": {"url": {"type": "string"}, "type": {"enum": ["official-documentation", "standard", "vendor-specification", "source-code", "independent-benchmark", "internal-measurement", "other"]}, "accessed": {"type": "string", "description": "YYYY-MM-DD actual access date"}}},
+    "methodology": {"type": "string"},
+    "result": {"type": "object", "additionalProperties": false, "properties": {"value": {"type": "number"}, "unit": {"type": "string"}, "samples": {"type": "integer", "minimum": 1}, "ci95": {"type": "array", "items": {"type": "number"}, "minItems": 2, "maxItems": 2}}},
+    "confidence": {"enum": ["official-specification", "independently-measured", "internally-measured", "estimated", "unknown", "unverified"]},
+    "provenance": {"type": "string", "description": "License / provenance of the data"},
+    "date": {"type": "string", "description": "YYYY-MM-DD record date"}
+  }
+}

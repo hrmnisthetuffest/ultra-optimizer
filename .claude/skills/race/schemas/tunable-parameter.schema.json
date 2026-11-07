@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/race/tunable-parameter.schema.json",
+  "title": "RACE tuning registry entry",
+  "description": "One allowlisted, app-owned tunable (spec 4.4). RACE may change only registered parameters; arbitrary variables, memory, or code are never tunable.",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "required": ["schema_version", "id", "purpose", "type", "default", "fallback", "adjustability", "workload_categories", "requirements", "quality_constraints", "validation", "apply", "rollback", "risk"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$"},
+    "id": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{2,80}$", "description": "Stable identifier"},
+    "purpose": {"type": "string", "minLength": 5},
+    "type": {"enum": ["integer", "number", "boolean", "enum", "path-select"]},
+    "range": {"type": "object", "additionalProperties": false, "properties": {"min": {"type": "number"}, "max": {"type": "number"}, "step": {"type": "number"}}},
+    "values": {"type": "array", "items": {"type": ["string", "number", "boolean"]}, "minItems": 1, "description": "Allowed values for enum / path-select"},
+    "default": {"type": ["string", "number", "boolean"]},
+    "fallback": {"type": ["string", "number", "boolean"]},
+    "adjustability": {"enum": ["runtime", "restart", "rebuild"]},
+    "workload_categories": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "requirements": {"type": "object", "additionalProperties": false, "properties": {"platforms": {"type": "array", "items": {"type": "string"}}, "frameworks": {"type": "array", "items": {"type": "string"}}, "capabilities": {"type": "array", "items": {"type": "string"}}}},
+    "dependencies": {"type": "array", "items": {"type": "string"}},
+    "mutually_exclusive_with": {"type": "array", "items": {"type": "string"}},
+    "quality_constraints": {"type": "array", "items": {"type": "string"}, "minItems": 1, "description": "Correctness / quality / security properties that must hold"},
+    "validation": {"type": "string", "description": "Name of the validation function or test that gates this value"},
+    "apply": {"type": "string", "description": "How the value is applied inside the host app"},
+    "rollback": {"type": "string", "description": "How the previous value is restored"},
+    "risk": {"enum": ["low", "medium", "high"]},
+    "requires_user_confirmation": {"type": "boolean"}
+  }
+}

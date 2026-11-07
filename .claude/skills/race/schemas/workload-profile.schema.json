@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/race/workload-profile.schema.json",
+  "title": "RACE application workload profile",
+  "description": "Aggregated, privacy-minimal description of what the app actually does. No content, accounts, tokens or identifiers.",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "required": ["schema_version", "app_id", "profile_level", "window", "classes"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$"},
+    "app_id": {"type": "string"},
+    "app_version": {"type": "string"},
+    "profile_level": {"enum": ["L1-passive", "L2-lightweight", "L3-active-benchmark"]},
+    "window": {"type": "object", "required": ["cumulative_foreground_seconds"], "additionalProperties": false, "properties": {"cumulative_foreground_seconds": {"type": "number", "minimum": 0}, "started": {"type": "string"}, "ended": {"type": "string"}}},
+    "classes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"enum": ["cpu-bound", "gpu-bound", "memory-bound", "storage-bound", "network-bound", "latency-sensitive", "throughput-oriented", "real-time", "mixed", "software-algorithm-bound", "unknown"]}
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {"type": "string"},
+          "count": {"type": "integer", "minimum": 0},
+          "p50_ms": {"type": "number", "minimum": 0},
+          "p95_ms": {"type": "number", "minimum": 0},
+          "p99_ms": {"type": "number", "minimum": 0},
+          "error_rate": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    },
+    "startup": {"type": "object", "additionalProperties": false, "properties": {"has_loading_screen": {"type": "boolean"}, "time_to_interactive_ms": {"type": "number", "minimum": 0}, "init_phases_ms": {"type": "object", "additionalProperties": {"type": "number"}}}},
+    "resource_footprint": {"type": "object", "additionalProperties": false, "properties": {"peak_rss_bytes": {"type": "integer", "minimum": 0}, "peak_vram_bytes": {"type": "integer", "minimum": 0}, "cpu_time_ms": {"type": "number", "minimum": 0}}},
+    "bottleneck_evidence": {"type": "string", "description": "Measured evidence for the classification, never hardware specs alone"},
+    "contains_user_content": {"const": false}
+  }
+}

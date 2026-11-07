@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/race/hardware-capability.schema.json",
+  "title": "RACE hardware capability record",
+  "description": "Detected capabilities of the machine the host app runs on. Any field that could not be detected MUST be the string \"unknown\" or \"unsupported\"; never guess. Specs are hints, not performance results.",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "required": ["schema_version", "detected_at", "detection_source", "cpu", "memory", "platform"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$"},
+    "detected_at": {"type": "string", "description": "ISO 8601 UTC timestamp"},
+    "detection_source": {"type": "string", "description": "API or interface used (supported, permissioned)"},
+    "cpu": {"$ref": "#/$defs/cpu"},
+    "gpus": {"type": "array", "items": {"$ref": "#/$defs/gpu"}},
+    "memory": {"$ref": "#/$defs/memory"},
+    "storage": {"type": "array", "items": {"$ref": "#/$defs/storage"}},
+    "platform": {"$ref": "#/$defs/platform"},
+    "display_media": {"$ref": "#/$defs/display_media"},
+    "ai_accelerators": {"type": "array", "items": {"$ref": "#/$defs/ai_accel"}}
+  },
+  "$defs": {
+    "ustr": {"type": "string", "description": "Value, or \"unknown\"/\"unsupported\""},
+    "uint": {"anyOf": [{"type": "integer", "minimum": 0}, {"enum": ["unknown", "unsupported"]}]},
+    "unum": {"anyOf": [{"type": "number", "minimum": 0}, {"enum": ["unknown", "unsupported"]}]},
+    "ubool": {"anyOf": [{"type": "boolean"}, {"enum": ["unknown", "unsupported"]}]},
+    "isa_entry": {
+      "type": "object",
+      "required": ["name", "cpu_supports", "os_enabled"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {"type": "string"},
+        "cpu_supports": {"$ref": "#/$defs/ubool"},
+        "os_enabled": {"$ref": "#/$defs/ubool", "description": "OS state (e.g. XSAVE/XCR0) must be verified separately from CPUID"}
+      }
+    },
+    "cpu": {
+      "type": "object",
+      "required": ["vendor", "model", "architecture", "logical_cores"],
+      "additionalProperties": false,
+      "properties": {
+        "vendor": {"type": "string"},
+        "model": {"type": "string"},
+        "family_generation": {"type": "string"},
+        "architecture": {"type": "string", "description": "e.g. x86_64, arm64, or unknown"},
+        "microarchitecture": {"type": "string"},
+        "physical_cores": {"$ref": "#/$defs/uint"},
+        "logical_cores": {"$ref": "#/$defs/uint"},
+        "hybrid_core_classes": {"type": "array", "items": {"type": "object", "required": ["class", "count"], "additionalProperties": false, "properties": {"class": {"type": "string"}, "count": {"$ref": "#/$defs/uint"}}}},
+        "topology": {"type": "string"},
+        "cache_bytes": {"type": "object", "additionalProperties": false, "properties": {"l1d": {"$ref": "#/$defs/uint"}, "l1i": {"$ref": "#/$defs/uint"}, "l2": {"$ref": "#/$defs/uint"}, "l3": {"$ref": "#/$defs/uint"}}},
+        "numa_nodes": {"$ref": "#/$defs/uint"},
+        "instruction_sets": {"type": "array", "items": {"$ref": "#/$defs/isa_entry"}},
+        "integrated_accelerators": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "gpu": {
+      "type": "object",
+      "required": ["vendor", "model", "kind"],
+      "additionalProperties": false,
+      "properties": {
+        "vendor": {"type": "string"},
+        "model": {"type": "string"},
+        "architecture": {"type": "string"},
+        "kind": {"enum": ["integrated", "discrete", "virtual", "unknown"]},
+        "apis": {"type": "array", "items": {"type": "object", "required": ["name", "version"], "additionalProperties": false, "properties": {"name": {"type": "string"}, "version": {"type": "string"}, "feature_level": {"type": "string"}}}},
+        "cuda_compute_capability": {"type": "string"},
+        "tensor_cores": {"$ref": "#/$defs/ubool"},
+        "ray_tracing": {"$ref": "#/$defs/ubool"},
+        "vram_bytes": {"$ref": "#/$defs/uint"},
+        "shared_or_unified_memory": {"$ref": "#/$defs/ubool"},
+        "video_codecs": {"type": "array", "items": {"type": "string"}},
+        "driver_version": {"type": "string"},
+        "pcie": {"type": "object", "additionalProperties": false, "properties": {"generation": {"type": "string"}, "width": {"type": "string"}, "resizable_bar": {"$ref": "#/$defs/ubool"}}}
+      }
+    },
+    "memory": {
+      "type": "object",
+      "required": ["total_bytes"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {"type": "string"},
+        "total_bytes": {"$ref": "#/$defs/uint"},
+        "available_bytes": {"$ref": "#/$defs/uint"},
+        "channels": {"$ref": "#/$defs/uint"},
+        "bandwidth_bytes_per_s": {"$ref": "#/$defs/unum"},
+        "unified": {"$ref": "#/$defs/ubool"},
+        "pressure": {"enum": ["none", "moderate", "high", "unknown"]}
+      }
+    },
+    "storage": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {"enum": ["nvme", "ssd", "hdd", "network", "removable", "unknown"]},
+        "capacity_bytes": {"$ref": "#/$defs/uint"},
+        "filesystem": {"type": "string"},
+        "measured_seq_read_bytes_per_s": {"$ref": "#/$defs/unum"},
+        "measured_random_read_iops": {"$ref": "#/$defs/unum"},
+        "measured_latency_us": {"$ref": "#/$defs/unum"}
+      }
+    },
+    "platform": {
+      "type": "object",
+      "required": ["os", "os_version", "process_arch"],
+      "additionalProperties": false,
+      "properties": {
+        "os": {"type": "string"},
+        "os_version": {"type": "string"},
+        "kernel": {"type": "string"},
+        "process_arch": {"type": "string"},
+        "execution": {"enum": ["native", "emulated", "translated", "unknown"]},
+        "runtime_versions": {"type": "object", "additionalProperties": {"type": "string"}},
+        "battery_saver_or_low_power": {"$ref": "#/$defs/ubool"}
+      }
+    },
+    "display_media": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "resolution": {"type": "string"},
+        "refresh_hz": {"$ref": "#/$defs/unum"},
+        "hdr": {"$ref": "#/$defs/ubool"},
+        "codecs": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "ai_accel": {
+      "type": "object",
+      "required": ["kind"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {"type": "string"},
+        "apis": {"type": "array", "items": {"type": "string"}},
+        "precisions": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

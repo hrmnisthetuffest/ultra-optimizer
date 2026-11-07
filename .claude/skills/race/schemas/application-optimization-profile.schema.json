@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/race/application-optimization-profile.schema.json",
+  "title": "RACE application optimization profile (local state)",
+  "description": "Versioned profile stored in the app's local state store: selected tunable values, original defaults, and last-known-good. Local only; never transmitted without explicit consent.",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "required": ["schema_version", "app_id", "profile_name", "mode", "values", "defaults", "created_at", "status"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$"},
+    "app_id": {"type": "string"},
+    "app_version": {"type": "string"},
+    "profile_name": {"type": "string"},
+    "mode": {"enum": ["balanced", "max-responsiveness", "max-throughput", "min-resource", "max-reliability", "min-package-size", "custom"]},
+    "values": {"type": "object", "additionalProperties": {"type": ["string", "number", "boolean"]}, "description": "tunable id -> chosen value"},
+    "defaults": {"type": "object", "additionalProperties": {"type": ["string", "number", "boolean"]}},
+    "last_known_good": {"type": "object", "additionalProperties": {"type": ["string", "number", "boolean"]}},
+    "hardware_fingerprint_class": {"type": "string", "description": "Coarse capability class hash, never serial numbers or account data"},
+    "created_at": {"type": "string"},
+    "status": {"enum": ["staged", "active", "rolled-back", "disabled", "failed-validation"]},
+    "auto_profiling": {"enum": ["enabled", "paused", "disabled"]},
+    "telemetry_consent": {"type": "boolean", "description": "Defaults to false. Local-only unless the user opted in."},
+    "history": {"type": "array", "items": {"type": "object", "required": ["at", "event"], "additionalProperties": false, "properties": {"at": {"type": "string"}, "event": {"type": "string"}, "detail": {"type": "string"}}}}
+  }
+}

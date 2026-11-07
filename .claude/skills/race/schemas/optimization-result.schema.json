@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/race/optimization-result.schema.json",
+  "title": "RACE optimization result / change history entry",
+  "description": "Explainability record for one optimization (spec 11.5). Measured values must come from real runs; never fabricate.",
+  "schema_version": "1.0.0",
+  "type": "object",
+  "required": ["schema_version", "id", "problem", "evidence", "approach", "outcome", "confidence", "rollback_method"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {"type": "string", "pattern": "^1\\.[0-9]+\\.[0-9]+$"},
+    "id": {"type": "string"},
+    "problem": {"type": "string"},
+    "evidence": {"type": "string"},
+    "affected": {"type": "object", "additionalProperties": false, "properties": {"files": {"type": "array", "items": {"type": "string"}}, "parameters": {"type": "array", "items": {"type": "string"}}}},
+    "approach": {"type": "string"},
+    "alternatives_considered": {"type": "array", "items": {"type": "string"}},
+    "expected": {"type": "string"},
+    "measured": {"type": "object", "additionalProperties": false, "properties": {"metric": {"type": "string"}, "before": {"type": "number"}, "after": {"type": "number"}, "unit": {"type": "string"}, "workload": {"type": "string"}, "samples": {"type": "integer", "minimum": 1}, "conditions": {"type": "string"}}},
+    "tests": {"type": "array", "items": {"type": "object", "required": ["name", "result"], "additionalProperties": false, "properties": {"name": {"type": "string"}, "result": {"enum": ["pass", "fail", "skipped", "not-run"]}}}},
+    "outcome": {"enum": ["kept", "rolled-back", "rejected", "pending"]},
+    "confidence": {"enum": ["verified", "measured", "estimated", "hypothesis", "unknown"]},
+    "tradeoffs": {"type": "array", "items": {"type": "string"}},
+    "untested_areas": {"type": "array", "items": {"type": "string"}},
+    "rollback_method": {"type": "string"}
+  }
+}
