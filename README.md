@@ -14,20 +14,31 @@
 
 ## RACE: the flagship
 
-Most software is tuned once, on the developer's machine, and then shipped unchanged to millions of very different computers. RACE (Runtime Adaptive Configuration Engine) is built to end that. It is an engine that lives inside the application and runs quietly in the background on the user's own device. It measures what that machine really has and how the app is really being used, then adjusts the app's deep internal settings to fit, continuously, with no user setup.
+**In one sentence:** you run `/race build` in Claude Code, and it writes a tuning engine *into your app's own code*. When you ship the app, that engine ships with it, and from then on it runs on every user's computer, looks at that computer, and tunes the app to fit it.
 
-**Examples of what it can tune**
+**The problem, in plain terms.** Think of a game, an editor or a server app. The developer picks settings like "use 4 threads" or "keep 200 MB in cache" on their own machine and ships the same numbers to everyone. On a $300 laptop that app stutters or eats all the RAM. On a 16-core workstation it leaves most of the machine idle. Nobody tuned it for *your* computer, and most users never open a settings menu to fix it.
 
-- **Thread and worker pools.** Eight spare cores? Use them for parallel work. Two cores on a busy laptop? Back off so the app doesn't choke everything else.
-- **Memory and cache sizes.** Large caches on a machine with free memory, small ones when memory is tight, instead of one size for everyone.
-- **Batching and chunk sizes.** Bigger batches where throughput matters, smaller ones where responsiveness does.
-- **Database connection pools and I/O concurrency.** Sized to the host and the real load, not to a number someone guessed.
-- **Background work scheduling.** Heavy jobs run while the machine is idle and pause the moment the user is active.
-- **Render and decode quality knobs** in apps and games, stepped up or down to hold a steady frame rate.
+**What RACE does about it.**
 
-**What keeps it safe.** Every setting has a developer-approved range, and values outside that range are rejected. Every change is validated against a baseline, and the last known-good configuration is restored if validation fails. RACE adapts only the application's own settings: it never edits BIOS, firmware, drivers, OS power or graphics settings, and it adds no AI features unless you choose them.
+1. **You build it once.** `/race build` studies your project and generates a small engine inside it: the code that detects the device, a list of the settings that are safe to tune, and the rules for changing them.
+2. **You ship the app as usual.** The engine is part of the app. Users install nothing extra.
+3. **On each user's device, the engine wakes up by itself.** It checks that device's CPU cores, memory and how the app is actually being used.
+4. **It tunes that one device.** Settings are changed for *that* computer only, not for everyone. The same build runs differently on a weak laptop and a strong desktop, automatically.
+5. **If a change makes things worse, it undoes it.** It restores the last setting that was known to work.
 
-**How you use it.** In Claude Code, `/race build` creates the engine inside your project, `/race integrate` wires it into an existing app, and `/race audit`, `benchmark`, `status`, `improve` and `review` keep it honest. This is an early project, and the engine is covered by a tested reference model, with real-hardware benchmarks still to come.
+**Concrete examples**
+
+- A video editor on a 4-core laptop uses 2 background workers for previews so the timeline stays smooth. The same editor on a 16-core PC uses 12 and renders previews in a fraction of the time.
+- A desktop app on 4 GB of RAM keeps a small cache. On 32 GB it keeps a large one and feels instant.
+- A backend service on a small VPS uses a small database connection pool. On a big machine it grows the pool when real traffic needs it.
+- A game steps texture and effect quality up or down to hold a steady frame rate on whatever hardware it finds.
+- An app that does heavy background work pauses it the moment you start using the computer and resumes when you stop.
+
+**It is not magic and not reckless.** Every tunable setting has a range the developer approves, and anything outside it is rejected. Changes are checked against a baseline. RACE adapts only the app's *own* settings. It never touches BIOS, firmware, drivers or your operating system's power or graphics settings, and it adds no AI features unless the developer chooses them.
+
+**Where this project is honest about its limits.** The engine design is covered by a tested reference model. It has not yet been benchmarked on real hardware fleets, so the speedups above describe what it is built to do, not measured results. If you try it and measure something, in either direction, please open an issue with the numbers.
+
+**Commands:** `/race build` (create the engine in your project), `/race integrate` (wire it into an existing app), `/race audit`, `benchmark`, `status`, `improve`, `review`.
 
 ## Why this exists
 
