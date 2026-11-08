@@ -2,7 +2,8 @@
 
 # Ultra Optimizer
 
-**Four Claude Code skills that make your app faster without touching your machine, your network or your security.**
+**RACE: the engine that lets an app tune itself to the computer it is running on.**
+<br>Plus three companion skills for code, network and server optimization.
 
 ![license](https://img.shields.io/badge/license-MIT-blue)
 ![claude code](https://img.shields.io/badge/Claude%20Code-skills-8A63D2)
@@ -10,6 +11,23 @@
 ![status](https://img.shields.io/badge/status-early-orange)
 
 </div>
+
+## RACE: the flagship
+
+Most software is tuned once, on the developer's machine, and then shipped unchanged to millions of very different computers. RACE (Runtime Adaptive Configuration Engine) is built to end that. It is an engine that lives inside the application and runs quietly in the background on the user's own device. It measures what that machine really has and how the app is really being used, then adjusts the app's deep internal settings to fit, continuously, with no user setup.
+
+**Examples of what it can tune**
+
+- **Thread and worker pools.** Eight spare cores? Use them for parallel work. Two cores on a busy laptop? Back off so the app doesn't choke everything else.
+- **Memory and cache sizes.** Large caches on a machine with free memory, small ones when memory is tight, instead of one size for everyone.
+- **Batching and chunk sizes.** Bigger batches where throughput matters, smaller ones where responsiveness does.
+- **Database connection pools and I/O concurrency.** Sized to the host and the real load, not to a number someone guessed.
+- **Background work scheduling.** Heavy jobs run while the machine is idle and pause the moment the user is active.
+- **Render and decode quality knobs** in apps and games, stepped up or down to hold a steady frame rate.
+
+**What keeps it safe.** Every setting has a developer-approved range, and values outside that range are rejected. Every change is validated against a baseline, and the last known-good configuration is restored if validation fails. RACE adapts only the application's own settings: it never edits BIOS, firmware, drivers, OS power or graphics settings, and it adds no AI features unless you choose them.
+
+**How you use it.** In Claude Code, `/race build` creates the engine inside your project, `/race integrate` wires it into an existing app, and `/race audit`, `benchmark`, `status`, `improve` and `review` keep it honest. This is an early project, and the engine is covered by a tested reference model, with real-hardware benchmarks still to come.
 
 ## Why this exists
 
